@@ -1,5 +1,9 @@
 <?php
 
+// so the oauth socialite does not need to be in the service provider 
+// because socialite already handle how the provider e.g google or GithubProviderwill be handle
+// unlike the laravel fortify that needs to  be written
+// namespace App\Http\Controllers;
 
 namespace App\Http\Controllers;
 
