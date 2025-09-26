@@ -32,6 +32,8 @@ return new class extends Migration
             $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
+            // so the payload is where any thing that is store in the
+            //  session it is encrypted and store in the session table
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
