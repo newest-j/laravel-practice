@@ -2,43 +2,38 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 
 const API_BASE_URL = 'http://localhost:8000/api'
-
-export const initializeCsrf = async () => {
-  try {
-    await api.get('/csrf-cookie')
-  } catch (error) {
-    console.error('Failed to initialize CSRF token:', error)
-  }
-}
-
-// Function to read CSRF token from cookies
-function getXsrfTokenFromCookie() {
-  const match = document.cookie.match(/XSRF-TOKEN=([^;]+)/)
-  return match ? decodeURIComponent(match[1]) : null
-}
+const API_ROOT = 'http://localhost:8000' // root without /api
 
 // Create the axios instance
 const api = axios.create({
   baseURL: API_BASE_URL,
-  withCredentials: true, // allow cookies for Sanctum
+  withCredentials: true, // allow cookies from Sanctum and to be sent back
   headers: {
     'Content-Type': 'application/json',
   },
 })
 
-// Request interceptor to set CSRF token automatically
-api.interceptors.request.use(
-  (config) => {
-    const token = getXsrfTokenFromCookie()
-    if (token) {
-      config.headers['X-XSRF-TOKEN'] = token
-    }
-    return config
-  },
-  (error) => {
-    return Promise.reject(error)
-  },
-)
+const rootApi = axios.create({
+  baseURL: API_ROOT,
+  withCredentials: true,
+})
+
+export const initializeCsrf = async () => {
+  try {
+    await rootApi.get('/sanctum/csrf-cookie')
+  } catch (error) {
+    console.error('Failed to initialize CSRF token:', error)
+  }
+}
+
+// request interceptor to get the csrf token and add it to the header
+api.interceptors.request.use((config) => {
+  const match = document.cookie.match(/XSRF-TOKEN=([^;]+)/)
+  if (match) {
+    config.headers['X-XSRF-TOKEN'] = decodeURIComponent(match[1])
+  }
+  return config
+})
 
 // Optional: Response interceptor for logging or error handling
 // ok so here the error thrown here is the error from the axios that is from the backend that the response and error which is like the .result and .error in promise will be the error catch in the signup and others

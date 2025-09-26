@@ -7,8 +7,10 @@ return [
     | Cross-Origin Resource Sharing (CORS) Configuration
     |--------------------------------------------------------------------------
     */
-
-    'paths' => ['api/*', 'auth/*'],
+    // ok so the cors path registration is only for a fetch and axios not a redirect 
+    // the * in the api is a wildcard that mean include any path after the api
+    // but sanctum is just that not path added to the front
+    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
 

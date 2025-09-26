@@ -7,6 +7,7 @@ use App\Http\Controllers\SocialAuthController;
 
 
 
+
 // Google OAuth (full-page redirect)
 // so the reason the {mode} here get the login or the sinup here is because of the parenthesis it defines it has a route parameter
 // where mode = login or signup
@@ -15,10 +16,8 @@ Route::get('/auth/google/callback', [SocialAuthController::class, 'handleGoogleC
 
 Route::prefix('api')->group(function () {
     // Add CSRF endpoint for Laravel sessions
-    Route::get('/csrf-cookie', function (Request $request) {
-        return response()->json(['message' => 'CSRF cookie set']);
-    });
-
+    // /sanctum/csrf-cookie this is what set the route for the crsf in laravel by sanctum 
+    // check the route list to see
     Route::post('/register', [UserController::class, 'register']);
     Route::post('/login', [UserController::class, 'login']);
 

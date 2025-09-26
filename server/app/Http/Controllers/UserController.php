@@ -29,7 +29,7 @@ class UserController extends Controller
             ]);
 
             //  storage  user id in the session // session is created by the startsession for the web.php connection to the withrouting in the bootstrap app.php calling the web middleware
-            // and the session id is sent to the cookie by the startsession that happens when laravel is running
+            // and the session id is sent to the cookie by the GET /sanctum/csrf-cookie  that is already runing in the route you can check the route list
             Auth::login($user);
 
 
@@ -80,7 +80,9 @@ class UserController extends Controller
             ]);
 
             if (!Auth::attempt($credentials)) {
-                // so the Auth::attempt() need the password field it uses all the non password field to query the database and the password field to do the check and when true it the send the user id to the session
+                // so the Auth::attempt() need the password field it uses all the non password field
+                //  to query the database and the password field to do the check and when 
+                //  true it the send the user id to the session
                 // unlike the Auth::login() is just log the user in with the user id store in the session
                 return response()->json([
                     'success' => false,
