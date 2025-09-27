@@ -116,7 +116,7 @@ export const userAuthStore = defineStore('authstore', {
           })
 
           if (router) {
-            router.push('/dashboard')
+            router.replace('/dashboard')
           }
 
           return postResponse
@@ -216,7 +216,7 @@ export const userAuthStore = defineStore('authstore', {
           })
 
           if (router) {
-            router.push('/dashboard')
+            router.replace('/dashboard')
           }
 
           return postResponse
@@ -299,7 +299,7 @@ export const userAuthStore = defineStore('authstore', {
           // Clear client auth state
           this.currentUser = null
 
-          if (router) router.push('/login')
+          if (router) router.replace('/login')
 
           return response
         }
