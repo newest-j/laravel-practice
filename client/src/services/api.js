@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Swal from 'sweetalert2'
 
 const API_BASE_URL = 'http://localhost:8000/api'
 const API_ROOT = 'http://localhost:8000' // root without /api

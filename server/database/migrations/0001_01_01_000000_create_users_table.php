@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            // in laravel the string mean varchar
             $table->string('name');
             $table->string('email')->unique();
             $table->string('google_id')->nullable();

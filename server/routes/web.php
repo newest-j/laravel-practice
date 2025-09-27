@@ -22,8 +22,15 @@ Route::prefix('api')->group(function () {
     Route::post('/login', [UserController::class, 'login']);
 
 
-    Route::middleware('auth')->group(function () {
+    Route::middleware('auth:sanctum')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
         Route::get('/user',  fn(Request $request) => $request->user()->only(['id', 'name', 'email']));
     });
 });
+
+
+// ORM is the concept that  a programming language that allows you 
+// to interact with the database using object 
+// instead of writting raw sql queries and the
+// eloquest is the implementation a laravel library
+// that makes this possible User:all $user->name
