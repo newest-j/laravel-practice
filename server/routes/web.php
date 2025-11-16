@@ -22,7 +22,7 @@ Route::prefix('api')->group(function () {
     Route::post('/login', [UserController::class, 'login']);
 
 
-    Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('auth')->group(function () {
         Route::post('/logout', [UserController::class, 'logout']);
         Route::get('/user',  fn(Request $request) => $request->user()->only(['id', 'name', 'email']));
     });

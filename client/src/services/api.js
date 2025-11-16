@@ -7,6 +7,8 @@ const API_ROOT = 'http://localhost:8000' // root without /api
 const api = axios.create({
   baseURL: API_BASE_URL,
   withCredentials: true, // allow cookies from Sanctum and to be sent back
+  // this header here is not really needed because axios will send it as a json automatically
+
   headers: {
     'Content-Type': 'application/json',
   },

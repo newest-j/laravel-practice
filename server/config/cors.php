@@ -13,7 +13,8 @@ return [
     'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
     'allowed_methods' => ['*'],
-
+    // Allow front-end to make cross-origin requests
+    // This controls which origins are allowed to make cross-origin HTTP requests to your Laravel backend.
     'allowed_origins' => [
         'http://localhost:5173',
         'http://127.0.0.1:5173',

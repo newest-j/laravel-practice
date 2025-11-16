@@ -11,6 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // schema is for the table create drop or alter while
+        // the blueprint is the structure of the table and how 
+        // each column is build
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             // in laravel the string mean varchar
